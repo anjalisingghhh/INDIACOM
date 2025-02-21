@@ -1,0 +1,134 @@
+@{
+    Layout = "~/Views/Shared/Layoutweb.cshtml";
+}
+
+<link href="~/Content/style/style.css" rel="stylesheet" />
+
+<style>
+    .table thead {
+        background-color: #70A4DC;
+        color: white;
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: lightgrey;
+    }
+
+    .warning {
+        color: red;
+        font-weight: bold;
+    }
+
+    .error {
+        color: red;
+        font-size: small;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+</style>
+
+<div class="content-section col-md-10">
+    <h1 class="generalHead" style="text-align: center; color: blue;">Registration Category Verification</h1>
+
+    <p class="generalTxt"><strong>The Payable Registration Fee will be calculated based on the parameters listed below:</strong></p>
+
+    <p class="generalTxt">
+        Please <a href="@Url.Action("EditProfile", "Account")" style="color: blue; text-decoration: underline;">edit your profile</a> if any of the information listed below is incorrect.
+    </p>
+    <p class="generalTxt">
+        Also, verify the correctness of your Name and Organization in your profile page, as this information will be used to generate your certificates.
+    </p>
+
+    <p class="generalTxt" style="color: red; font-weight: bold;">
+        Kindly ensure that you edit your profile before submitting documents for verification, as profile editing will be disabled after you submit these documents.
+    </p>
+
+    <form id="frmVerificationDocuments" name="frmVerificationDocuments" method="post" enctype="multipart/form-data" onsubmit="return validateForm()" action="@Url.Action("SubmitVerificationDocuments", "Registration")">
+        <table border="1" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>S. No.</th>
+                    <th>Parameter Name</th>
+                    <th>Value (as per our records)</th>
+                    <th>Required Documents <span class="warning">(Only PDF format)</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.</td>
+                    <td>Member Category</td>
+                    <td>Student</td>
+                    <td>
+                        Please upload your Organizational ID Card / letter from Head of Organization <br>
+                        <input type="file" id="fileMemCat" name="fileMemCat" accept=".pdf" required>
+                        <div class="error" id="fileMemCatError">Please upload a valid PDF file.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Are you a Member of IEEE / CSI / IET / IETE / IE(I) / ISTE</td>
+                    <td>No</td>
+                    <td>
+                        <strong>In case you are a member</strong><br>
+                        Please upload a proof of Membership <br>
+                        <input type="file" id="fileProfBody" name="fileProfBody" accept=".pdf">
+                        <div class="error" id="fileProfBodyError">Only PDF files are allowed.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>Payment Date (Early Bird/Regular/On Spot)</td>
+                    <td>On Spot (Payment deadline: 31<sup>st</sup> Jan, 2024)</td>
+                    <td>--NA--</td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Nationality (Applicable Currency)</td>
+                    <td>Indian (INR)</td>
+                    <td>--NA--</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <input type="hidden" name="EventIDVal" id="EventIDVal" value="INDIACom25">
+        <input type="hidden" name="ProfBodyVal" id="ProfBodyVal" value="N">
+        <input type="hidden" name="NationalityVal" id="NationalityVal" value="I">
+
+        <div style="text-align: center; margin-top: 20px;">
+            <input type="submit" name="B1" id="B1" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        var fileMemCat = document.getElementById("fileMemCat").value;
+        var fileProfBody = document.getElementById("fileProfBody").value;
+        var isValid = true;
+
+        // Validate Organizational ID upload
+        if (!fileMemCat || !fileMemCat.endsWith(".pdf")) {
+            document.getElementById("fileMemCatError").style.display = "block";
+            isValid = false;
+        } else {
+            document.getElementById("fileMemCatError").style.display = "none";
+        }
+
+        // Validate Membership proof upload if fileProfBody is selected
+        if (fileProfBody && !fileProfBody.endsWith(".pdf")) {
+            document.getElementById("fileProfBodyError").style.display = "block";
+            isValid = false;
+        } else {
+            document.getElementById("fileProfBodyError").style.display = "none";
+        }
+
+        return isValid; // Prevents form submission if false
+    }
+</script>

@@ -1,0 +1,97 @@
+﻿@model INDIACom.Models.Department
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("DepartmentADD1", "Department", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="page-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                <div class="breadcrumb-title pe-3">BVICAM</div>
+                <div class="ps-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                                <a href="~/Views/Faculty/AddDesignation.cshtml">~/Views/Faculty/AddDesignation.cshtml</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Designation</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+            <div class="row">
+                <div class="col-xl-12 mx-auto">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <form class="row g-3">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="col-md-6">
+                                        <label for="Designation" class="form-label">Designation</label>
+                                        @Html.TextBoxFor(m => m.DeptName, new { @class = "form-control", @id = "DeptName", @placeholder = "Please enter Department" })
+                                    </div>
+                                </div>
+                                <div class="row mt-3 justify-content-center">
+                                    <div class="col-md-6 d-flex justify-content-center">
+                                        <div class="d-md-flex d-grid gap-3">
+                                            <button type="button" id="btnsave" class="btn btn-primary px-4">Submit</button>
+                                            <a href="/Department/AddDepartment/" class="btn btn-danger px-4">Reset</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row-->
+        </div>
+    </div>
+}
+<!--end page wrapper -->
+<!--start overlay-->
+<div class="overlay toggle-icon"></div>
+<!--end overlay-->
+<!--Start Back To Top Button-->
+<a href="javascript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+<!--End Back To Top Button-->
+<!-- jQuery & JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/js/common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnsave').on('click', function () {
+            saveProcess();
+        });
+    });
+
+    function saveProcess() {
+        if (typeof $ === "undefined") {
+            alert("jQuery is not loaded properly.");
+            return;
+        }
+
+        var data = $('#__AjaxAntiForgeryForm').serialize();
+
+        $.post('/Department/AddDepartment', data, function (result, status) {
+            if (status === "success") {
+                if (result.includes("Successfully") || result.includes("Already")) {
+                    Swal.fire(result).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire(result);
+                }
+            } else {
+                Swal.fire("Something is wrong. Please contact the admin.");
+            }
+        });
+    }
+</script>

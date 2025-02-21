@@ -1,0 +1,97 @@
+@model List<YourNamespace.Models.VerifyDocument>
+
+<h2>Uploaded Documents</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Member ID</th>
+            <th>Institution Card</th>
+            <th>Professional Body ID</th>
+            <th>Passport</th>
+            <th>Request Date</th>
+            <th>Member Category Status</th>
+            <th>Professional Body Status</th>
+            <th>Decision Date</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doc in Model)
+        {
+            <tr>
+                <td>@doc.MemberID</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(doc.InstitutionCard))
+                    {
+                        <a href="@Url.Content("~/Uploads/" + System.IO.Path.GetFileName(doc.InstitutionCard))" download>Download</a>
+                    }
+                    else
+                    {
+                        <span>Not Uploaded</span>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(doc.ProfBodyIDCard))
+                    {
+                        <a href="@Url.Content("~/Uploads/" + System.IO.Path.GetFileName(doc.ProfBodyIDCard))" download>Download</a>
+                    }
+                    else
+                    {
+                        <span>Not Uploaded</span>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(doc.Passport))
+                    {
+                        <a href="@Url.Content("~/Uploads/" + System.IO.Path.GetFileName(doc.Passport))" download>Download</a>
+                    }
+                    else
+                    {
+                        <span>Not Uploaded</span>
+                    }
+                </td>
+                <td>@doc.RequestDate.ToString("dd-MM-yyyy")</td>
+                <td>
+                    @if (doc.MemberCatVerificationStatus == 'A')
+                    {
+                        <span style="color: green;">Approved</span>
+                    }
+                    else
+                    {
+                        <span style="color: red;">Rejected</span>
+                    }
+                </td>
+                <td>
+                    @if (doc.ProfBodyVerificationStatus == 'A')
+                    {
+                        <span style="color: green;">Approved</span>
+                    }
+                    else
+                    {
+                        <span style="color: red;">Rejected</span>
+                    }
+                </td>
+                <td>
+                    @if (doc.DecisionDate.HasValue)
+                    {
+                        @doc.DecisionDate.Value.ToString("dd-MM-yyyy")
+                    }
+                    else
+                    {
+                        <span>Pending</span>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(doc.Comment))
+                    {
+                        @doc.Comment
+                    }
+                    else
+                    {
+                        <span>No Comments</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

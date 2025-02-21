@@ -1,0 +1,160 @@
+E:\INDIACom\bin\INDIACom.dll.config
+E:\INDIACom\bin\INDIACom.dll
+E:\INDIACom\bin\INDIACom.pdb
+E:\INDIACom\bin\roslyn\csc.exe
+E:\INDIACom\bin\roslyn\csc.exe.config
+E:\INDIACom\bin\roslyn\csc.rsp
+E:\INDIACom\bin\roslyn\csi.exe
+E:\INDIACom\bin\roslyn\csi.exe.config
+E:\INDIACom\bin\roslyn\csi.rsp
+E:\INDIACom\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\INDIACom\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\INDIACom\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\INDIACom\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\INDIACom\bin\roslyn\Microsoft.Managed.Core.targets
+E:\INDIACom\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\INDIACom\bin\roslyn\Microsoft.Win32.Primitives.dll
+E:\INDIACom\bin\roslyn\System.AppContext.dll
+E:\INDIACom\bin\roslyn\System.Collections.Immutable.dll
+E:\INDIACom\bin\roslyn\System.Console.dll
+E:\INDIACom\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+E:\INDIACom\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\INDIACom\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\INDIACom\bin\roslyn\System.Globalization.Calendars.dll
+E:\INDIACom\bin\roslyn\System.IO.Compression.dll
+E:\INDIACom\bin\roslyn\System.IO.Compression.ZipFile.dll
+E:\INDIACom\bin\roslyn\System.IO.FileSystem.dll
+E:\INDIACom\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\INDIACom\bin\roslyn\System.Net.Http.dll
+E:\INDIACom\bin\roslyn\System.Net.Sockets.dll
+E:\INDIACom\bin\roslyn\System.Reflection.Metadata.dll
+E:\INDIACom\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\INDIACom\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\INDIACom\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\INDIACom\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\INDIACom\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\INDIACom\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\INDIACom\bin\roslyn\System.Threading.Tasks.Extensions.dll
+E:\INDIACom\bin\roslyn\System.ValueTuple.dll
+E:\INDIACom\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\INDIACom\bin\roslyn\System.Xml.XmlDocument.dll
+E:\INDIACom\bin\roslyn\System.Xml.XPath.dll
+E:\INDIACom\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\INDIACom\bin\roslyn\vbc.exe
+E:\INDIACom\bin\roslyn\vbc.exe.config
+E:\INDIACom\bin\roslyn\vbc.rsp
+E:\INDIACom\bin\roslyn\VBCSCompiler.exe
+E:\INDIACom\bin\roslyn\VBCSCompiler.exe.config
+E:\INDIACom\bin\Antlr3.Runtime.dll
+E:\INDIACom\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\INDIACom\bin\Microsoft.Web.Infrastructure.dll
+E:\INDIACom\bin\Newtonsoft.Json.dll
+E:\INDIACom\bin\System.Web.Helpers.dll
+E:\INDIACom\bin\System.Web.Mvc.dll
+E:\INDIACom\bin\System.Web.Optimization.dll
+E:\INDIACom\bin\System.Web.Razor.dll
+E:\INDIACom\bin\System.Web.WebPages.Deployment.dll
+E:\INDIACom\bin\System.Web.WebPages.dll
+E:\INDIACom\bin\System.Web.WebPages.Razor.dll
+E:\INDIACom\bin\WebGrease.dll
+E:\INDIACom\bin\System.Web.Helpers.xml
+E:\INDIACom\bin\System.Web.Mvc.xml
+E:\INDIACom\bin\System.Web.Optimization.xml
+E:\INDIACom\bin\System.Web.Razor.xml
+E:\INDIACom\bin\System.Web.WebPages.xml
+E:\INDIACom\bin\System.Web.WebPages.Deployment.xml
+E:\INDIACom\bin\System.Web.WebPages.Razor.xml
+E:\INDIACom\bin\Newtonsoft.Json.xml
+E:\INDIACom\bin\Antlr3.Runtime.pdb
+E:\INDIACom\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\INDIACom\obj\Debug\INDIACom.csproj.AssemblyReference.cache
+E:\INDIACom\obj\Debug\INDIACom.csproj.CoreCompileInputs.cache
+E:\INDIACom\obj\Debug\INDIACom.csproj.Up2Date
+E:\INDIACom\obj\Debug\INDIACom.dll
+E:\INDIACom\obj\Debug\INDIACom.pdb
+E:\INDIACom\bin\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\INDIACom.dll.config
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\INDIACom.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\INDIACom.pdb
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\csc.exe
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\csc.exe.config
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\csc.rsp
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\csi.exe
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\csi.exe.config
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\csi.rsp
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.AppContext.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Console.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.IO.Compression.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Net.Http.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Net.Sockets.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.ValueTuple.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\vbc.exe
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\vbc.exe.config
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\vbc.rsp
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\VBCSCompiler.exe
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Antlr3.Runtime.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Newtonsoft.Json.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Helpers.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Mvc.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Optimization.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Razor.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.WebPages.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.WebPages.Razor.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\WebGrease.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Helpers.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Mvc.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Optimization.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.Razor.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.WebPages.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\System.Web.WebPages.Razor.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Newtonsoft.Json.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Antlr3.Runtime.pdb
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\obj\Debug\INDIACom.csproj.AssemblyReference.cache
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\obj\Debug\INDIACom.csproj.CoreCompileInputs.cache
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\obj\Debug\INDIACom.csproj.Up2Date
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\obj\Debug\INDIACom.dll
+C:\Users\Kapil Singh\OneDrive\Desktop\INDIACOM\INDIACom\INDIACom\obj\Debug\INDIACom.pdb
