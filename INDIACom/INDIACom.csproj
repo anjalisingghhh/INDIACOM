@@ -126,13 +126,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DropdownController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SpecialSessionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\SpecialSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -249,9 +253,12 @@
     <Content Include="Views\Home\Venue.cshtml" />
     <Content Include="Views\Shared\ImportantDates.cshtml" />
     <Content Include="Views\Shared\Layoutweb.cshtml" />
+    <Content Include="Views\Event\SubmitEvent.cshtml" />
+    <Content Include="Views\SpecialSession\SpecialSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Dropdown\" />
   </ItemGroup>
   <ItemGroup>

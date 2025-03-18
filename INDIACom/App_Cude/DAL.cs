@@ -144,5 +144,90 @@ namespace INDIACom.App_Cude
         }
         #endregion
 
-    }
+
+        #region Event
+
+        public string InsertEvent(EventModel model)
+        {
+            string message = "";
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "ProcInsertEvent";
+
+                cmd.Parameters.AddWithValue("@eventID", model.Event_Id);
+                cmd.Parameters.AddWithValue("@eventName", model.Event_Name);
+                cmd.Parameters.AddWithValue("@eventCreation", model.Event_Creation_date);
+                cmd.Parameters.AddWithValue("@eventOpeningDate", model.Event_Opening_date);
+                cmd.Parameters.AddWithValue("@eventClosingDate", model.Event_Closing_date);
+                cmd.Parameters.AddWithValue("@description", model.Event_Description);
+                cmd.Parameters.AddWithValue("@eventType", model.Event_Type);
+
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                message = "Success";
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                message = "Something went wrong";
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+
+            return message;
+        }
+
+
+
+        #endregion
+
+       
+        #region SpecialSession 
+        public string InsertSession(SpecialSessionModel ss)
+        {
+            string message = "";
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "ProcInsertSession";
+                cmd.Parameters.AddWithValue("@SSName", ss.SSName);
+                cmd.Parameters.AddWithValue("@Mobile", ss.Mobile);
+                cmd.Parameters.AddWithValue("@Email", ss.Email);
+                cmd.Parameters.AddWithValue("@Org", ss.Organization);
+                cmd.Parameters.AddWithValue("@Topic", ss.Topic);
+                cmd.Parameters.AddWithValue("@Request_Date", ss.Request_Date);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                message = "Success";
+
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                message = "Something went wrong";
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return message;
+        }
+
+        #endregion
+    
+}
 }
