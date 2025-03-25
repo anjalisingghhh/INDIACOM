@@ -1,0 +1,356 @@
+@model INDIACom.Models.MemberModel
+@{
+    Layout = null;
+    var empty = Enumerable.Empty<SelectListItem>();
+}
+
+
+<h1 style="color: blue;">Submit Event</h1>
+<p>Fields marked with <span style="color: red;">*</span> are required.</p>
+
+
+@if (ViewBag.Message != null)
+{
+    <p style="color: green;"><b>@ViewBag.Message</b></p>
+}
+@using (Html.BeginForm("Register", "Member", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "__AjaxAntiForgeryFormy" }))
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Display Validation Errors -->
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <table>
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Salutation</td>
+            <td>
+                @Html.DropDownListFor(m => m.Salutation, new List<SelectListItem> {
+                    new SelectListItem { Text = "Please Select a Salutation", Value = "" },
+                    new SelectListItem { Text = "Ms.", Value = "Ms." },
+                    new SelectListItem { Text = "Mrs.", Value = "Mrs." },
+                    new SelectListItem { Text = "Mr.", Value = "Mr." }
+                }, new { @class = "form-control", required = "required", name = "Salutation" })
+                <div class="text-danger" id="SalutationError"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Name</td>
+            <td>
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", size = "50" })
+                <div class="text-danger" id="NameError"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Address</td>
+            <td>
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", size = "50" })
+                <div class="error" id="AddressError" style="margin-bottom: 15px;"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Country</td>
+            <td>
+                @Html.DropDownListFor(m => m.CountryID, empty, "--Select Country--")
+                <div class="text-danger" id="CountryError"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>State</td>
+            <td>
+                @Html.DropDownListFor(m => m.StateID, empty, "--Select State--")
+                <div class="text-danger" id="StateError"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>City</td>
+            <td>
+                @Html.DropDownListFor(m => m.CityID, empty, "--Select City--")
+                <div class="text-danger" id="CityError"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Pincode</td>
+            <td>
+                @Html.TextBoxFor(model => model.Pincode, new { @class = "form-control", size = "50" })
+                <div class="error" id="PincodeError" style="margin-bottom: 15px;"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>E-Mail</td>
+            <td>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", size = "50" })
+                <div class="error" id="EmailError" style="margin-bottom: 15px;"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right"><span style="color: red">* </span>Mobile No.</td>
+            <td>
+                @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", size = "50" })
+                <div class="error" id="MobileError" style="margin-bottom: 15px;"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right"><span class="asterix" style="color: red">* </span>Interested Event</td>
+            <td> @Html.DropDownListFor(m => m.EventID, empty, "--Select Event--")</td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>CSI Membership No.</td>
+            <td>
+                @Html.TextBoxFor(model => model.CSI_No, new { @class = "form-control", size = "50" })
+                <div class="error" id="CSI_Error" style="margin-bottom: 15px;"></div>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>IEEE/ISTE/IETE/IITP/IMP Membership No.</td>
+            <td>
+                @Html.TextBoxFor(model => model.IEEE_No, new { @class = "form-control", size = "50" })
+                <div class="error" id="IEEE_Error" style="margin-bottom: 15px;"></div>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Category</td>
+            <td>
+                @Html.DropDownListFor(m => m.Category, new List<SelectListItem> {
+                    new SelectListItem { Text = "[Select Category]", Value = "" },
+                    new SelectListItem { Text = "Research Scholar", Value = "Research Scholar" },
+                    new SelectListItem { Text = "Full-Time Student", Value = "Full-Time Student" },
+                    new SelectListItem { Text = "Faculty", Value = "Faculty" },
+                    new SelectListItem { Text = "Industrial Representative", Value = "Industrial Representative" }
+                }, new { @class = "form-control", required = "required", name = "Category" })
+                <div class="text-danger" id="SalutationError"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right"><span class="asterix" style="color: red">* </span>Password</td>
+            <td>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", size = "50" })
+                @*<div>@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })</div>*@
+            </td>
+        </tr>
+
+        <tr>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Confirm Password</td>
+            <td>
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", size = "50" })
+                <div class="error" id="PasswordError" style="margin-bottom: 15px;"></div>
+            </td>
+        </tr>
+    </table>
+}
+
+
+
+
+<table border="0" width="760" id="table4" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="256" align="center" colspan="2">
+                <span class="microfont" style="color: gray ;">
+                    **I hereby convey my consent to receive information about
+                    the activities of the institution by email or by SMS on my
+                    Mobile number, from time to time, by the
+                    Institution.
+                </span>
+            </td>
+        </tr>
+</table>
+
+
+
+<button type="button" id="submitBtn">Submit</button>
+<input type="reset" value="Reset">
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+<script src="~/Scripts/jquery-3.7.0.min.js"></script>
+<script src="~/Content/assets/js/jquery.min.js"></script>
+<script src="~/Scripts/common.js"></script>
+<script src="~/Content/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+<script src="~/Content/assets/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+
+<script type="text/javascript">
+    var form = $('#__AjaxAntiForgeryForm');
+    var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+    function populateDropdown(dropdownId, data) {
+        var dropdown = $("#" + dropdownId);
+        dropdown.empty(); // Clear previous options
+
+        $.each(data, function (index, item) {
+            dropdown.append('<option value="' + item.Value + '">' + item.Text + '</option>');
+        });
+    }
+
+    $(document).ready(function () {
+        // var Emp_Name = '@ViewBag.empName';
+        // $('#Emp_Name').val(Emp_Name);
+        var stateid = '@ViewBag.id';
+        loadEvent();
+        loadCountries();
+
+        $("#CountryID").change(function () {
+            var selectedCountry = $(this).val();
+            console.log("Selected Country ID:", selectedCountry);
+            loadStates({ countryId: selectedCountry });
+        });
+
+        $("#StateID").change(function () {
+            var selectedCountry = $("#CountryID").val();
+            var selectedState = $("#StateID").val();
+            loadCities({ countryId: selectedCountry, stateId: selectedState });
+        });
+
+        // Log selected value when an event is selected
+        $("#EventID").change(function () {
+            var selectedEvent = $(this).val();
+            console.log("Selected Event ID:", selectedEvent);
+        });
+    });
+
+    function loadEvent(obj) {
+        $.post('@Url.Action("getEvent", "dropdown")', obj, function (data, status) {
+            if (status == "success") {
+                populateDropdown("EventID", data);
+            } else {
+                console.log("No data");
+            }
+        });
+    }
+
+    function loadCountries(obj) {
+        $.post('@Url.Action("getCountries", "dropdown")', obj, function (data, status) {
+            if (status == "success") {
+                populateDropdown("CountryID", data);
+            }
+        });
+    }
+
+    function loadStates(obj) {
+        $.post('@Url.Action("getStates", "dropdown")', obj, function (data, status) {
+            if (status === "success") {
+                populateDropdown("StateID", data);
+            }
+        });
+    }
+
+    function loadCities(obj) {
+        $.post('@Url.Action("getCities", "dropdown")', obj, function (data, status) {
+            if (status === "success") {
+                populateDropdown("CityID", data);
+            }
+        });
+    }
+
+    $("#submitBtn").click(function () {
+        var selectedCountryID = $("#CountryID").val();
+        var selectedCountryName = $("#CountryID option:selected").text(); // Get selected country name
+
+        var selectedStateID = $("#StateID").val();
+        var selectedStateName = $("#StateID option:selected").text();
+
+        var selectedCityID = $("#CityID").val();
+        var selectedCityName = $("#CityID option:selected").text();
+
+        var selectedEventID = $("#EventID").val();
+        var selectedEventName = $("#EventID option:selected").text(); // Get selected event name
+
+        console.log("Submitting Form with:");
+        console.log("Collected Form Data:");
+        console.log("Salutation:", $("#Salutation").val());
+        console.log("Name:", $("#Name").val());
+        console.log("Address:", $("#Address").val());
+        console.log("Password:", $("#Password").val());
+        console.log("Email:", $("#Email").val());
+        console.log("Pincode:", $("#Pincode").val());
+        console.log("CSI_No:", $("#CSI_No").val());
+        console.log("IEEE_No:", $("#IEEE_No").val());
+        console.log("Category:", $("#Category").val());
+        console.log("Country ID:", selectedCountryID, "| Country Name:", selectedCountryName);
+        console.log("State ID:", selectedStateID, "| State Name:", selectedStateName);
+        console.log("City ID:", selectedCityID, "| City Name:", selectedCityName);
+        console.log("Event ID:", selectedEventID, "| Event Name:", selectedEventName);
+
+        $("#submitBtn").prop("disabled", true); // Disable button to prevent double submission
+
+        $.ajax({
+            url: "@Url.Action("SubmitRegister", "Member")",
+            type: "POST",
+            data: {
+                CountryID: selectedCountryID,
+                Country: selectedCountryName, // Sending country name
+                StateID: selectedStateID,
+                State: selectedStateName,
+                CityID: selectedCityID,
+                City: selectedCityName,
+                EventID: selectedEventID,
+                Event: selectedEventName, // Sending event name
+                Salutation: $("#Salutation").val(),
+                Name: $("#Name").val(),
+                Address: $("#Address").val(),
+                Password: $('#Password').val(),
+                Email: $('#Email').val(),
+                Pincode: $('#Pincode').val(),
+                CSI_No: $('#CSI_No').val(),
+                IEEE_No: $('#IEEE_No').val(),
+                Category: $('#Category').val(),
+                Mobile: $('#Mobile').val(),
+            },
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: "Registered successfully!"
+                    }).then(() => {
+                        location.reload(); // Reloads after success
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: response.message || "Submission failed."
+                    });
+                    $("#submitBtn").prop("disabled", false); // Re-enable if failed
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Country ID:", selectedCountryID, "| Country Name:", selectedCountryName);
+                console.log("Event ID:", selectedEventID, "| Event Name:", selectedEventName);
+                console.error("AJAX Error:", xhr.responseText);
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Something went wrong! " + xhr.responseText
+                });
+                $("#submitBtn").prop("disabled", false);
+            }
+        });
+    });
+</script>
