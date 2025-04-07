@@ -13,7 +13,7 @@
 {
     <p style="color: green;"><b>@ViewBag.Message</b></p>
 }
-@using (Html.BeginForm("Register", "Member", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "__AjaxAntiForgeryFormy" }))
+@using (Html.BeginForm("Register", "Member", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "__AjaxAntiForgeryForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -97,7 +97,10 @@
                 <div class="error" id="MobileError" style="margin-bottom: 15px;"></div>
             </td>
         </tr>
-
+        <tr>
+            <td width="256" align="right"><span style="color: red">* </span>Biodata (.pdf Only)</td>
+            <td><input type="file" id="file" name="file" class="form-control" accept=".pdf" required /></td>
+        </tr>
         <tr>
             <td width="256" align="right"><span class="asterix" style="color: red">* </span>Interested Event</td>
             <td> @Html.DropDownListFor(m => m.EventID, empty, "--Select Event--")</td>
@@ -120,20 +123,26 @@
             </td>
 
         </tr>
-
         <tr>
-            <td width="256" align="right" valign="top"><span style="color: red">* </span>Category</td>
+            <td width="256" align="right" valign="top"><span style="color: red">* </span>Organisation</td>
             <td>
-                @Html.DropDownListFor(m => m.Category, new List<SelectListItem> {
-                    new SelectListItem { Text = "[Select Category]", Value = "" },
-                    new SelectListItem { Text = "Research Scholar", Value = "Research Scholar" },
-                    new SelectListItem { Text = "Full-Time Student", Value = "Full-Time Student" },
-                    new SelectListItem { Text = "Faculty", Value = "Faculty" },
-                    new SelectListItem { Text = "Industrial Representative", Value = "Industrial Representative" }
-                }, new { @class = "form-control", required = "required", name = "Category" })
-                <div class="text-danger" id="SalutationError"></div>
+                @Html.DropDownListFor(m => m.OrgID,empty, "--Select Org--")
             </td>
         </tr>
+       <tr>
+        <td width="256" align="right" valign="top">
+        <span style="color: red">* </span > Category </td >
+            <td>
+            @Html.DropDownListFor(m => m.Category, new List<SelectListItem> {
+                new SelectListItem { Text = "[Select Category]", Value = "" },
+                new SelectListItem { Text = "Research Scholar", Value = "Research Scholar" },
+                new SelectListItem { Text = "Full-Time Student", Value = "Full-Time Student" },
+                new SelectListItem { Text = "Faculty", Value = "Faculty" },
+                new SelectListItem { Text = "Industrial Representative", Value = "Industrial Representative" }
+            }, new { @class = "form-control", required = "required", name = "Category" })
+            <div class="text-danger" id="SalutationError"></div>
+            </td>
+       </tr>
 
         <tr>
             <td width="256" align="right"><span class="asterix" style="color: red">* </span>Password</td>
@@ -151,10 +160,10 @@
             </td>
         </tr>
     </table>
+
+
+
 }
-
-
-
 
 <table border="0" width="760" id="table4" cellpadding="5">
     <tbody>
@@ -170,7 +179,146 @@
         </tr>
 </table>
 
+<div id="OrgDetails" class="hidden" style="display: none">
+    <table class="form"
+           border="0"
+           width="760"
+           id="table4"
+           cellpadding="5">
+        <tbody>
+            <tr>
+                <td colspan="2" class="content">
+                    <b>Organisation Details</b><span class="microfont">
+                        <br />
+                        Fields marked with an asterisk
+                        <span class="asterix"> *</span> are required.<br />
+                        Note: Various certificates acknowledging your
+                        contributions would be generated based on our records
+                        submitted by you. In future, when registering for an
+                        event, please do take time out and update your profile
+                        to avoid unnecessary inconvenience.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>
+                        Why am I being asked to fill up organisational
+                        details?
+                    </b><br />
+                    Filling up the form, would allow us to track other members
+                    from your organisation. Members from registered
+                    organisation may get group discounts and other benefits.
+                    Also it would help us enhance our communication with your
+                    organisation.
+                </td>
+            </tr>
+            <tr>
+                <td width="256" align="right" valign="top">
+                    <span class="asterix">* </span>Organisation Name
+                </td>
+                <td width="478">
+                    @Html.TextBoxFor(model => model.OrgName, new { @class = "form-control", size = "50" })
+                    <div class="error" id="OrgNameError">
+                        (Please type the organisation's name.)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="256" align="right" valign="top">
+                    <span class="asterix">* </span>Organisation Short Name
+                </td>
+                <td width="478">
+                    @Html.TextBoxFor(model => model.OrgShortName, new { @class = "form-control", size = "50" })
+                    <div class="error" id="OrgShortNameError">
+                        (Please type the organisation's short name.)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="256" align="right" valign="top">
+                    <span class="asterix">* </span>Address
+                </td>
+                <td width="478">
+                    @Html.TextAreaFor(model => model.OrgAddress, new { @class = "form-control", rows = "4", cols = "30" })
 
+                    <div class="error" id="OrgAddressError">
+                        (Please type the organisation's address.)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="256" align="right" valign="top">
+                    <span class="asterix">* </span>Name of HOD / Contact
+                    Person
+                </td>
+                <td width="478">
+                    @Html.TextBoxFor(model => model.OrgContactPerson, new { @class = "form-control", size = "50" })
+                    <div class="error" id="OrgContactNameError">
+                        (Please type the name of the person to whom we can
+                        contact for further reference. The name can contain only
+                        alphabets, spaces and ".")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="256" align="right" valign="top">
+                    <span class="asterix">* </span>E-Mail
+                </td>
+                <td width="478">
+                    @Html.TextBoxFor(model => model.OrgEmail, new { @class = "form-control", size = "50" })
+                    <div class="error" id="OrgEmailError">
+                        (Please type the organisation's e-mail address.)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="256" align="right" valign="top">&nbsp;</td>
+                <td>
+                    <span class="microfont">Country Code - State Code - Phone Number</span>
+                    <br />
+                    <span class="microfont">
+                        (India 91)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - (Delhi
+                        11)
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td width="256" align="right" valign="top">
+                    <span class="asterix">* </span>Phone
+                </td>
+                <td width="478">
+                    <input name="txtOrgPhone"
+                           id="txtOrgPhone"
+                           type="hidden" />
+                    <input type="text"
+                           name="txtOrgPhone1"
+                           size="5"
+                           style="text-align: right" />
+                    -
+                    <input type="text"
+                           name="txtOrgPhone2"
+                           size="5"
+                           style="text-align: right" />
+                    -
+                    <input type="text"
+                           name="txtOrgPhone3"
+                           size="10"
+                           style="text-align: right" />&nbsp; <span id="spOrgPhone">( - - )</span>
+                    <div class="error" id="OrgPhoneError">
+                        (Please type the organisation's phone number. The phone
+                        number can contain only numerals.)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td width="256" align="right">&nbsp;</td>
+                <td width="478">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <button type="button" id="submitBtn">Submit</button>
 <input type="reset" value="Reset">
@@ -203,21 +351,24 @@
         var dropdown = $("#" + dropdownId);
         dropdown.empty(); // Clear previous options
 
+        dropdown.append('<option value="">[Select]</option>');
+
         $.each(data, function (index, item) {
             dropdown.append('<option value="' + item.Value + '">' + item.Text + '</option>');
         });
+
+        if (dropdownId === "OrgID") {
+            dropdown.append('<option value="Others">Others</option>');
+        }
     }
 
     $(document).ready(function () {
-        // var Emp_Name = '@ViewBag.empName';
-        // $('#Emp_Name').val(Emp_Name);
-        var stateid = '@ViewBag.id';
         loadEvent();
         loadCountries();
+        loadOrg();
 
         $("#CountryID").change(function () {
             var selectedCountry = $(this).val();
-            console.log("Selected Country ID:", selectedCountry);
             loadStates({ countryId: selectedCountry });
         });
 
@@ -230,8 +381,53 @@
         // Log selected value when an event is selected
         $("#EventID").change(function () {
             var selectedEvent = $(this).val();
-            console.log("Selected Event ID:", selectedEvent);
         });
+
+        $('#OrgID').change(function () {
+            var orgid = $(this).val();
+            var org = $("#OrgID option:selected").text();
+          
+            var form2 = $("#OrgDetails");
+
+            if (org === "Others") {
+                form2.removeClass("hidden").show();
+            } else {
+                form2.addClass("hidden").hide();
+            }
+         
+        })
+
+        function updateOrgPhone() {
+            var phone1 = $("input[name='txtOrgPhone1']").val();
+            var phone2 = $("input[name='txtOrgPhone2']").val();
+            var phone3 = $("input[name='txtOrgPhone3']").val();
+            var fullPhone = phone1 + "-" + phone2 + "-" + phone3;
+            $("#txtOrgPhone").val(fullPhone);
+            $("#spOrgPhone").text(fullPhone || "( - - )");
+        }
+
+        // Attach event listeners
+        $("input[name='txtOrgPhone1'], input[name='txtOrgPhone2'], input[name='txtOrgPhone3']").keyup(updateOrgPhone);
+
+        function updateOrgShortName() {
+            var orgShortName = $("#OrgShortName").val().trim();
+            var orgName = $("#OrgName").val().trim();
+
+            if (orgShortName === "" && orgName !== "") {
+                var initials = orgName.split(" ").map(word => word.charAt(0).toUpperCase()).join("");
+                $("#OrgShortName").val(initials);
+            }
+
+            if (orgShortName === "") {
+                $("#OrgShortNameError").show();
+            } else {
+                $("#OrgShortNameError").hide();
+            }
+        }
+
+        $("#OrgShortName").keyup(updateOrgShortName);
+
+
     });
 
     function loadEvent(obj) {
@@ -268,60 +464,88 @@
         });
     }
 
+    function loadOrg(obj) {
+           $.post('@Url.Action("getOrg", "dropdown")', obj, function (data, status) {
+         if (status == "success") {
+             populateDropdown("OrgID", data);
+         } else {
+             console.log("No data");
+         }
+        });
+    }
+
     $("#submitBtn").click(function () {
-        var selectedCountryID = $("#CountryID").val();
-        var selectedCountryName = $("#CountryID option:selected").text(); // Get selected country name
+        var OrgID = $("#OrgID").val();
 
-        var selectedStateID = $("#StateID").val();
-        var selectedStateName = $("#StateID option:selected").text();
+        var OrganisationName = $("#OrgID option:selected").text();
+        var OrgName = $("#OrgName").val();
+        var OrgShortName = $("#OrgShortName").val();
+        var OrgPhone = $("#txtOrgPhone").val();
+        var OrgEmail = $("#OrgEmail").val();
+        var OrgAddress = $("#OrgAddress").val();
+        var OrgPerson = $("#OrgContactPerson").val();
 
-        var selectedCityID = $("#CityID").val();
-        var selectedCityName = $("#CityID option:selected").text();
+        console.log("OrganizationName", OrganisationName);
+        console.log("OrgName", OrgName);
+        console.log("OrgShortName", OrgShortName);
+        console.log("OrgPhone", OrgPhone);
+        console.log("OrgEmail", OrgEmail);
+        console.log("address", OrgAddress);
+        console.log("person", OrgPerson);
 
-        var selectedEventID = $("#EventID").val();
-        var selectedEventName = $("#EventID option:selected").text(); // Get selected event name
 
-        console.log("Submitting Form with:");
-        console.log("Collected Form Data:");
-        console.log("Salutation:", $("#Salutation").val());
-        console.log("Name:", $("#Name").val());
-        console.log("Address:", $("#Address").val());
-        console.log("Password:", $("#Password").val());
-        console.log("Email:", $("#Email").val());
-        console.log("Pincode:", $("#Pincode").val());
-        console.log("CSI_No:", $("#CSI_No").val());
-        console.log("IEEE_No:", $("#IEEE_No").val());
-        console.log("Category:", $("#Category").val());
-        console.log("Country ID:", selectedCountryID, "| Country Name:", selectedCountryName);
-        console.log("State ID:", selectedStateID, "| State Name:", selectedStateName);
-        console.log("City ID:", selectedCityID, "| City Name:", selectedCityName);
-        console.log("Event ID:", selectedEventID, "| Event Name:", selectedEventName);
+
+        var formData = new FormData();
+        var fileInput = $("#file")[0].files[0];
+        if (!fileInput) {
+            Swal.fire("Error", "Please select a file.", "error");
+            return;
+        }
+
+        formData.append("__RequestVerificationToken", token);
+        formData.append("Salutation", $("#Salutation").val());
+        formData.append("Name", $("#Name").val());
+        formData.append("Address", $("#Address").val());
+        formData.append("CountryID", $("#CountryID").val());
+        formData.append("Country", $("#CountryID option:selected").text());
+        formData.append("StateID", $("#StateID").val());
+        formData.append("State", $("#StateID option:selected").text());
+        formData.append("CityID", $("#CityID").val());
+        formData.append("City", $("#CityID option:selected").text());
+        formData.append("Pincode", $("#Pincode").val());
+        formData.append("Email", $("#Email").val());
+        formData.append("Mobile", $("#Mobile").val());
+        formData.append("CSI_No", $("#CSI_No").val());
+        formData.append("IEEE_No", $("#IEEE_No").val());
+        formData.append("Category", $("#Category").val());
+        formData.append("Password", $("#Password").val());
+        formData.append("ConfirmPassword", $("#ConfirmPassword").val());
+        formData.append("EventID", $("#EventID").val());
+        formData.append("Event", $("#EventID option:selected").text());
+        formData.append("file", $("#file")[0].files[0]);
+        formData.append("OrgID", OrgID);
+        formData.append("OrganizationName", OrganisationName);
+        formData.append("OrgEmail", OrgEmail);
+        formData.append("OrgName", OrgName);
+        formData.append("OrgShortName", OrgShortName);
+        formData.append("OrgAddress", OrgAddress);
+        formData.append("OrgContactPerson", OrgPerson);
+        formData.append("OrgPhone", OrgPhone);
+
+        formData.forEach((value, key) => {
+            console.log(key + ": " + value);
+        });
 
         $("#submitBtn").prop("disabled", true); // Disable button to prevent double submission
 
         $.ajax({
             url: "@Url.Action("SubmitRegister", "Member")",
             type: "POST",
-            data: {
-                CountryID: selectedCountryID,
-                Country: selectedCountryName, // Sending country name
-                StateID: selectedStateID,
-                State: selectedStateName,
-                CityID: selectedCityID,
-                City: selectedCityName,
-                EventID: selectedEventID,
-                Event: selectedEventName, // Sending event name
-                Salutation: $("#Salutation").val(),
-                Name: $("#Name").val(),
-                Address: $("#Address").val(),
-                Password: $('#Password').val(),
-                Email: $('#Email').val(),
-                Pincode: $('#Pincode').val(),
-                CSI_No: $('#CSI_No').val(),
-                IEEE_No: $('#IEEE_No').val(),
-                Category: $('#Category').val(),
-                Mobile: $('#Mobile').val(),
-            },
+            data: formData,
+
+            contentType: false,
+            processData: false,
+
             success: function (response) {
                 if (response.success) {
                     Swal.fire({
@@ -335,14 +559,13 @@
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: response.message || "Submission failed."
+                        text: response.message || "Registration failed."
                     });
                     $("#submitBtn").prop("disabled", false); // Re-enable if failed
                 }
             },
             error: function (xhr, status, error) {
-                console.log("Country ID:", selectedCountryID, "| Country Name:", selectedCountryName);
-                console.log("Event ID:", selectedEventID, "| Event Name:", selectedEventName);
+
                 console.error("AJAX Error:", xhr.responseText);
                 Swal.fire({
                     icon: "error",

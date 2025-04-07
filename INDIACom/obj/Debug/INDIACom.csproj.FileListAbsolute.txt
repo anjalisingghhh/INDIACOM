@@ -238,6 +238,8 @@ D:\mca 4th sem\INDIACom\obj\Debug\INDIACom.csproj.CoreCompileInputs.cache
 D:\mca 4th sem\INDIACom\obj\Debug\INDIACom.csproj.Up2Date
 D:\mca 4th sem\INDIACom\obj\Debug\INDIACom.dll
 D:\mca 4th sem\INDIACom\obj\Debug\INDIACom.pdb
+C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\obj\Debug\INDIACom.csproj.AssemblyReference.cache
+C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\obj\Debug\INDIACom.csproj.CoreCompileInputs.cache
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\bin\INDIACom.dll.config
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\bin\INDIACom.dll
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\bin\INDIACom.pdb
@@ -313,8 +315,6 @@ C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\bin\System.Web.WebP
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\bin\Newtonsoft.Json.xml
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\bin\Antlr3.Runtime.pdb
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\obj\Debug\INDIACom.csproj.AssemblyReference.cache
-C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\obj\Debug\INDIACom.csproj.CoreCompileInputs.cache
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\obj\Debug\INDIACom.csproj.Up2Date
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\obj\Debug\INDIACom.dll
 C:\Users\himan\Source\Repos\anjalisingghhh\INDIACOM\INDIACom\obj\Debug\INDIACom.pdb

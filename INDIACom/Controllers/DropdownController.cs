@@ -38,5 +38,13 @@ namespace INDIACom.Controllers
             return Json(list, 0);
 
         }
+
+        public JsonResult getOrg( string type = "")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            CommonMethod.bindDropDownHnGrid("Proc_Common", list, "ORG", "", "", "", "", type);
+            return Json(list, 0);
+
+        }
     }
 }
