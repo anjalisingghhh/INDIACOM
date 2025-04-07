@@ -234,7 +234,7 @@ namespace INDIACom.App_Cude
         #endregion
 
         #region User
-        public string InsertUserDetails(MemberModel model)
+        public string InsertUserDetails(MembersModel model)
         {
             string message = "";
             OpenConnection();
@@ -332,9 +332,8 @@ namespace INDIACom.App_Cude
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Proc_CheckCredentials";
-                cmd.Parameters.AddWithValue("@Email", model.Email);
-                cmd.Parameters.AddWithValue("@MemberID", model.UserID);
-                cmd.Parameters.AddWithValue("@Password", model.Password);
+                cmd.Parameters.AddWithValue("@EmailId",filter_bad_chars_rep(model.Email));
+                cmd.Parameters.AddWithValue("@UserID", model.UserID);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -355,7 +354,7 @@ namespace INDIACom.App_Cude
         #endregion
 
         #region Organisation
-        public string AddOrganisation(MemberModel model)
+        public string AddOrganisation(MembersModel model)
         {
             string result = "";
             OpenConnection();

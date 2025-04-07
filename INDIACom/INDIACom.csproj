@@ -147,6 +147,7 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\MembersModel.cs" />
     <Compile Include="Models\SpecialSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

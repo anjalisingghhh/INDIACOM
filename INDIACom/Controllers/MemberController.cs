@@ -22,7 +22,7 @@ namespace INDIACom.Controllers
         }
 
      [HttpPost]
-        public JsonResult SubmitRegister(MemberModel model, HttpPostedFileBase file)
+        public JsonResult SubmitRegister(MembersModel model, HttpPostedFileBase file)
         {
             if(model == null)
             {
@@ -133,7 +133,7 @@ namespace INDIACom.Controllers
         }
 
 
-        public string AddOrganisation(MemberModel org)
+        public string AddOrganisation(MembersModel org)
         {
             if (org == null)
             {

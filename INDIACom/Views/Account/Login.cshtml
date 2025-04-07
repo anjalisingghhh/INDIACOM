@@ -95,15 +95,27 @@
                     UserID: $('#UserID').val(),
                     Password: $('#Password').val(),
                 },
-                success: function (response) {
-                    if (response.success) {
+                success: function (response,status) {
+                    if (status == "success") {
+                        if (response.status == "success") {
+                            page = response.url;
+                            window.open(page, "_self");
+                        } else {
+                            $("#password").val('');
+                            swal.fire(response);
+                        }
+                    
+                            /*
                         Swal.fire({
                             icon: "success",
                             title: "Success",
                             text: "Login successfully!"
                         }).then(() => {
+                            location.reload();
+                            
                             window.location.href = "/Dashboard/UserDashboard"; // Reloads after success
                         });
+                            */
                     } else {
                         Swal.fire({
                             icon: "error",
