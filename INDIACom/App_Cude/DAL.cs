@@ -6,6 +6,10 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using INDIACom.Models;
+using System.Drawing;
+using System.Reflection;
+using Microsoft.Ajax.Utilities;
+using System.Web.Helpers;
 
 namespace INDIACom.App_Cude
 {
@@ -107,44 +111,6 @@ namespace INDIACom.App_Cude
         }
 
 
-        #region department
-
-        public string AddDepartment(Department dept)
-        {
-            string message = "";
-            OpenConnection();
-            SqlCommand cmd = new SqlCommand();
-            SqlTransaction transaction = con.BeginTransaction();
-            try
-            {
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Proc_AddDepartment";
-                cmd.Parameters.AddWithValue("Dept_Name", dept.DeptName);
-               
-              
-                cmd.Parameters.AddWithValue("Msg", "");
-                cmd.Parameters["Msg"].Size = 256;
-                cmd.Parameters["Msg"].Direction = ParameterDirection.InputOutput;
-                cmd.Transaction = transaction;
-                cmd.ExecuteNonQuery();
-                message = cmd.Parameters["Msg"].Value.ToString();
-                transaction.Commit();
-            }
-            catch (Exception ex1)
-            {
-                transaction.Rollback();
-                message = "Something went wrong";
-            }
-            finally
-            {
-                DisposeConnection();
-            }
-            return message;
-        }
-        #endregion
-
-
         #region Event
 
         public string InsertEvent(EventModel model)
@@ -228,6 +194,204 @@ namespace INDIACom.App_Cude
         }
 
         #endregion
-    
-}
+
+        #region file
+        public string SaveFilePath(MemberDocumentModel doc)
+        {
+            string message = "";
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "ProcSaveFilePath";
+
+                cmd.Parameters.AddWithValue("@UserID", doc.UserID);
+                cmd.Parameters.AddWithValue("@FilePath", doc.FilePath);
+
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                message = "Success";
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                message = "Something went wrong";
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+
+            return message;
+        }
+
+
+        #endregion
+
+        #region User
+        public string InsertUserDetails(MemberModel model)
+        {
+            string message = "";
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_InsertDetails";
+                cmd.Parameters.AddWithValue("@Salutation", model.Salutation);
+                cmd.Parameters.AddWithValue("@Name", model.Name);
+                cmd.Parameters.AddWithValue("@Address", model.Address);
+                cmd.Parameters.AddWithValue("@Country", model.Country);
+                cmd.Parameters.AddWithValue("@CountryID", model.CountryID);
+                cmd.Parameters.AddWithValue("@State", model.State);
+                cmd.Parameters.AddWithValue("@StateID", model.StateID);
+                cmd.Parameters.AddWithValue("@City", model.City);
+                cmd.Parameters.AddWithValue("@CityID", model.CityID);
+                cmd.Parameters.AddWithValue("@Pincode", model.Pincode);
+                cmd.Parameters.AddWithValue("@Email", model.Email);
+                cmd.Parameters.AddWithValue("@Mobile", model.Mobile);
+                cmd.Parameters.AddWithValue("@Event", model.Event);
+                cmd.Parameters.AddWithValue("@CSI_No", model.CSI_No);
+                cmd.Parameters.AddWithValue("@IEEE_No", model.IEEE_No);
+                cmd.Parameters.AddWithValue("@Organisation", model.OrganisationName);
+                cmd.Parameters.AddWithValue("@Category", model.Category);
+                cmd.Parameters.AddWithValue("@Password", model.Password);
+
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                message = "Success";
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                message = "Something went wrong";
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+
+            return message;
+        }
+
+        public long GetMemberID(string email, long mobile)
+        {
+           long memberID = 0;
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_GetMemberID";
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Mobile", mobile);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    memberID = (long)result;
+                }
+            }
+            catch (Exception)
+            {
+                
+                transaction.Rollback();
+
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return memberID;
+        }
+
+        public DataTable checkCredentials(LoginUserModel model)
+        {
+            DataTable ds = new DataTable();
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_CheckCredentials";
+                cmd.Parameters.AddWithValue("@Email", model.Email);
+                cmd.Parameters.AddWithValue("@MemberID", model.UserID);
+                cmd.Parameters.AddWithValue("@Password", model.Password);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                sda.Fill(ds);
+            }
+            catch (Exception)
+            {
+                ds = new DataTable();
+                transaction.Rollback();
+                
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return ds;
+        }
+        #endregion
+
+        #region Organisation
+        public string AddOrganisation(MemberModel model)
+        {
+            string result = "";
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_SaveOrganisation";
+                cmd.Parameters.AddWithValue("@OrgEmail", model.OrgEmail);
+                cmd.Parameters.AddWithValue("@OrgName", model.OrgName);
+                cmd.Parameters.AddWithValue("@OrgShortName", model.OrgShortName);
+                cmd.Parameters.AddWithValue("@OrgAddress", model.OrgAddress);
+                cmd.Parameters.AddWithValue("@OrgContactPerson", model.OrgContactPerson);
+                cmd.Parameters.AddWithValue("@OrgPhone", model.OrgPhone);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                result = "Success";
+            }
+            catch (Exception)
+            {
+
+                transaction.Rollback();
+                result = "Something went wrong";
+
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return result;
+        }
+
+        #endregion
+    }
 }
