@@ -8,6 +8,7 @@ using System.IO;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace INDIACom.Controllers
 {
@@ -22,7 +23,7 @@ namespace INDIACom.Controllers
         }
 
      [HttpPost]
-        public JsonResult SubmitRegister(MemberModel model, HttpPostedFileBase file)
+        public JsonResult SubmitRegister(MembersModel model, HttpPostedFileBase file)
         {
             if(model == null)
             {
@@ -92,7 +93,6 @@ namespace INDIACom.Controllers
                 }
 
                 // Creating the filename
-                string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
                 string newFileName = $"{userId}_{name}_{documentType}{extension}";
                 string uploadPath = Server.MapPath("~/UploadedFiles/");
 
@@ -133,7 +133,7 @@ namespace INDIACom.Controllers
         }
 
 
-        public string AddOrganisation(MemberModel org)
+        public string AddOrganisation(MembersModel org)
         {
             if (org == null)
             {
@@ -148,6 +148,76 @@ namespace INDIACom.Controllers
             }
             else return null;
         }
+
+        [HttpGet]
+        public ActionResult EditProfile()
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var user = Session["user"] as MemberModel;
+            DataTable dt = dal.GetUserById(user.MemberID); // Custom DAL method
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                MemberModel model = new MemberModel
+                {
+                    MemberID = long.Parse(dt.Rows[0]["member_id"].ToString()),
+                    Name = dt.Rows[0]["Name"].ToString(),
+                    Email = dt.Rows[0]["Email"].ToString(),
+                    Category = dt.Rows[0]["Category"].ToString(),
+                    IEEE_No = dt.Rows[0]["IEEE_No"].ToString(),
+                    CSI_No = dt.Rows[0]["CSI_No"].ToString(),
+                    Event = dt.Rows[0]["Event"].ToString(),
+                    Password = dt.Rows[0]["Password"].ToString(),
+                    Biodata = dt.Rows[0]["Bio_data_path"].ToString(),
+                    OrganisationName = dt.Rows[0]["Organisation"].ToString(),
+                    Salutation = dt.Rows[0]["Salutation"].ToString(),
+                    CountryID = dt.Rows[0]["CountryID"].ToString(),
+                    Country = dt.Rows[0]["Country"].ToString(),
+                    Address = dt.Rows[0]["Address"].ToString(),
+                    Mobile = dt.Rows[0]["Mobile"].ToString(),
+                    Pincode= dt.Rows[0]["Pincode"].ToString(),
+
+
+                };
+
+                return View(model);
+            }
+
+            return RedirectToAction("Login", "Account");
+        }
+
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(MemberModel model, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isUpdated = dal.UpdateUserProfile(model);
+                if (file != null)
+                {
+                    return UploadFile(file, model.MemberID, model.Name);
+                }
+               
+
+                if (isUpdated)
+                {
+                    ViewBag.Message = "Profile updated successfully!";
+                    Session["user"] = model; // Refresh session
+                }
+                else
+                {
+                    ViewBag.Message = "Failed to update profile.";
+                }
+            }
+
+            return View(model);
+        }
+
 
     }
 }

@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Reflection;
 using Microsoft.Ajax.Utilities;
 using System.Web.Helpers;
+using System.Web.Services.Description;
 
 namespace INDIACom.App_Cude
 {
@@ -234,7 +235,7 @@ namespace INDIACom.App_Cude
         #endregion
 
         #region User
-        public string InsertUserDetails(MemberModel model)
+        public string InsertUserDetails(MembersModel model)
         {
             string message = "";
             OpenConnection();
@@ -332,9 +333,8 @@ namespace INDIACom.App_Cude
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Proc_CheckCredentials";
-                cmd.Parameters.AddWithValue("@Email", model.Email);
-                cmd.Parameters.AddWithValue("@MemberID", model.UserID);
-                cmd.Parameters.AddWithValue("@Password", model.Password);
+                cmd.Parameters.AddWithValue("@EmailId",filter_bad_chars_rep(model.Email));
+                cmd.Parameters.AddWithValue("@UserID", model.UserID);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
@@ -352,10 +352,90 @@ namespace INDIACom.App_Cude
             }
             return ds;
         }
+
+        public DataTable GetUserById(long memberId)
+        {
+            DataTable ds = new DataTable();
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_GetCredentials";
+                cmd.Parameters.AddWithValue("@memberid", memberId);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                sda.Fill(ds);
+            }
+            catch (Exception)
+            {
+                ds = new DataTable();
+                transaction.Rollback();
+
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return ds;
+        }
+
+        public bool UpdateUserProfile(MemberModel model)
+        {
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_UpdateProfile";
+                cmd.Parameters.AddWithValue("@memberId", model.MemberID);
+                cmd.Parameters.AddWithValue("@Salutation", model.Salutation);
+                cmd.Parameters.AddWithValue("@Name", model.Name);
+                cmd.Parameters.AddWithValue("@Address", model.Address);
+                cmd.Parameters.AddWithValue("@Country", model.Country);
+                cmd.Parameters.AddWithValue("@CountryID", model.CountryID);
+                cmd.Parameters.AddWithValue("@State", model.State);
+                cmd.Parameters.AddWithValue("@StateID", model.StateID);
+                cmd.Parameters.AddWithValue("@City", model.City);
+                cmd.Parameters.AddWithValue("@CityID", model.CityID);
+                cmd.Parameters.AddWithValue("@Pincode", model.Pincode);
+                cmd.Parameters.AddWithValue("@Email", model.Email);
+                cmd.Parameters.AddWithValue("@Mobile", model.Mobile);
+                cmd.Parameters.AddWithValue("@Event", model.Event);
+                cmd.Parameters.AddWithValue("@CSI_No", model.CSI_No);
+                cmd.Parameters.AddWithValue("@IEEE_No", model.IEEE_No);
+                cmd.Parameters.AddWithValue("@Organisation", model.OrganisationName);
+                cmd.Parameters.AddWithValue("@Category", model.Category);
+                cmd.Parameters.AddWithValue("@Password", model.Password);
+
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                return false;
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+
+        }
+
         #endregion
 
         #region Organisation
-        public string AddOrganisation(MemberModel model)
+        public string AddOrganisation(MembersModel model)
         {
             string result = "";
             OpenConnection();

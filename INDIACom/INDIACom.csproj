@@ -147,6 +147,7 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\MembersModel.cs" />
     <Compile Include="Models\SpecialSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -272,6 +273,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Dashboard\AdminDashboard.cshtml" />
     <Content Include="Views\Dashboard\UserDashboard.cshtml" />
+    <Content Include="Views\Member\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
