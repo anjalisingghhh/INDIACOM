@@ -79,11 +79,8 @@ namespace INDIACom.Controllers
 
                                 Session["user"] = user.LoggedInUser;
 
-                               /* if (user.LoggedInUser.NeedsPasswordChange)
-                                {
-                                    return Json(new { status = "success", message = "", url = "/Account/ChngPassword", showPdf = "no" }, 0);
-                                }*/
-                                 if (user.LoggedInUser.UserTypeId == 1)
+                               
+                                if (user.LoggedInUser.UserTypeId == 1)
                                 {
                                     return Json(new { status = "success", message = "", url = "/Dashboard/AdminDashboard", showPdf = "no" }, 0);
                                 }
@@ -121,6 +118,28 @@ namespace INDIACom.Controllers
             }
             return Json(str, JsonRequestBehavior.AllowGet);
         }
+        
+        
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            try
+            {
+                FormsAuthentication.SignOut();
+                Session.Clear();
+                System.Web.HttpContext.Current.Session.RemoveAll();
+                Session.Abandon();
 
+                return RedirectToAction("Login", "Account");
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            finally
+            {
+                Session.Abandon();
+            }
+        }
     }
 }

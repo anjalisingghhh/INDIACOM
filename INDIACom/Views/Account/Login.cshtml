@@ -13,7 +13,7 @@
 {
     <p style="color: green;"><b>@ViewBag.Message</b></p>
 }
-@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "__AjaxAntiForgeryForm" }))
+@using (Html.BeginForm("EditProdile", "Account", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "__AjaxAntiForgeryForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -31,6 +31,7 @@
             </td>
         </tr>
         <tr>
+            <td></td>
             <td>OR</td>
         </tr>
         <tr>
@@ -44,7 +45,7 @@
         <tr>
             <td width="256" align="right" valign="top"><span style="color: red">* </span>Password</td>
             <td>
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", size = "50" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", size = "50" })
                 <div class="text-danger" id="NameError"></div>
             </td>
 
