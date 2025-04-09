@@ -157,5 +157,10 @@ namespace INDIACom.Controllers
         {
             return View();
         }
+
+        public ActionResult UploadResume()
+        {
+            return View();
+        }
     }
 }

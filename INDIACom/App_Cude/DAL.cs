@@ -6,6 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using INDIACom.Models;
+using System.Drawing;
+using System.Reflection;
+using Microsoft.Ajax.Utilities;
+using System.Web.Helpers;
+using System.Web.Services.Description;
 using System.Reflection;
 
 namespace INDIACom.App_Cude
@@ -108,47 +113,7 @@ namespace INDIACom.App_Cude
         }
 
 
-
-
         #region department
-
-        public string AddDepartment(Department dept)
-        {
-            string message = "";
-            OpenConnection();
-            SqlCommand cmd = new SqlCommand();
-            SqlTransaction transaction = con.BeginTransaction();
-            try
-            {
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Proc_AddDepartment";
-                cmd.Parameters.AddWithValue("Dept_Name", dept.DeptName);
-
-
-                cmd.Parameters.AddWithValue("Msg", "");
-                cmd.Parameters["Msg"].Size = 256;
-                cmd.Parameters["Msg"].Direction = ParameterDirection.InputOutput;
-                cmd.Transaction = transaction;
-                cmd.ExecuteNonQuery();
-                message = cmd.Parameters["Msg"].Value.ToString();
-                transaction.Commit();
-            }
-            catch (Exception ex1)
-            {
-                transaction.Rollback();
-                message = "Something went wrong";
-            }
-            finally
-            {
-                DisposeConnection();
-            }
-            return message;
-        }
-        #endregion
-
-
-        #region Event
 
         public string InsertEvent(EventModel model)
         {
@@ -162,16 +127,14 @@ namespace INDIACom.App_Cude
                 cmd.Connection = con;
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ProcInsertEvent";
-
-                cmd.Parameters.AddWithValue("@eventID", model.Event_Id);
-                cmd.Parameters.AddWithValue("@eventName", model.Event_Name);
-                cmd.Parameters.AddWithValue("@eventCreation", model.Event_Creation_date);
-                cmd.Parameters.AddWithValue("@eventOpeningDate", model.Event_Opening_date);
-                cmd.Parameters.AddWithValue("@eventClosingDate", model.Event_Closing_date);
-                cmd.Parameters.AddWithValue("@description", model.Event_Description);
-                cmd.Parameters.AddWithValue("@eventType", model.Event_Type);
-
+                cmd.CommandText = "Proc_AddDepartment";
+                cmd.Parameters.AddWithValue("Dept_Name", dept.DeptName);
+               
+              
+                cmd.Parameters.AddWithValue("Msg", "");
+                cmd.Parameters["Msg"].Size = 256;
+                cmd.Parameters["Msg"].Direction = ParameterDirection.InputOutput;
+                cmd.Transaction = transaction;
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 message = "Success";
@@ -193,7 +156,7 @@ namespace INDIACom.App_Cude
 
         #endregion
 
-
+       
         #region SpecialSession 
         public string InsertSession(SpecialSessionModel ss)
         {
@@ -206,15 +169,13 @@ namespace INDIACom.App_Cude
                 cmd.Connection = con;
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Proc_InsertSession";
+                cmd.CommandText = "ProcInsertSession";
                 cmd.Parameters.AddWithValue("@SSName", ss.SSName);
-                cmd.Parameters.AddWithValue("@MemberID", ss.MemberID);
-                cmd.Parameters.AddWithValue("@TrackID", ss.TrackID);
                 cmd.Parameters.AddWithValue("@Mobile", ss.Mobile);
                 cmd.Parameters.AddWithValue("@Email", ss.Email);
                 cmd.Parameters.AddWithValue("@Org", ss.Organization);
                 cmd.Parameters.AddWithValue("@Topic", ss.Topic);
-
+                cmd.Parameters.AddWithValue("@Request_Date", ss.Request_Date);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 message = "Success";
@@ -234,13 +195,10 @@ namespace INDIACom.App_Cude
 
         #endregion
 
-
-        #region CheckBioDataExists
-
-        public string GetUserDetails(int memberId, out UserModel user)
+        #region file
+        public string SaveFilePath(MemberDocumentModel doc)
         {
             string message = "";
-            user = null;
             OpenConnection();
             SqlCommand cmd = new SqlCommand();
             SqlTransaction transaction = con.BeginTransaction();
@@ -250,26 +208,14 @@ namespace INDIACom.App_Cude
                 cmd.Connection = con;
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Proc_GetUserDetails"; // Calling stored procedure
-                cmd.Parameters.AddWithValue("@MemberID", memberId);
+                cmd.CommandText = "ProcSaveFilePath";
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        user = new UserModel
-                        {
-                            MemberID = Convert.ToInt32(reader["MemberID"]),
-                            BioDataPath = reader["BioDataPath"] != DBNull.Value ? reader["BioDataPath"].ToString() : null
-                        };
-                        message = "Success";
-                    }
-                    else
-                    {
-                        message = "User not found";
-                    }
-                }
+                cmd.Parameters.AddWithValue("@UserID", doc.UserID);
+                cmd.Parameters.AddWithValue("@FilePath", doc.FilePath);
+
+                cmd.ExecuteNonQuery();
                 transaction.Commit();
+                message = "Success";
             }
             catch (Exception)
             {
@@ -280,19 +226,16 @@ namespace INDIACom.App_Cude
             {
                 DisposeConnection();
             }
+
             return message;
         }
 
 
         #endregion
 
-      
-
-
-
-
-        #region News
-        public string InsertNews(NewsModel news)
+       
+        #region SpecialSession 
+        public string InsertSession(SpecialSessionModel ss)
         {
             string message = "";
             OpenConnection();
@@ -304,25 +247,21 @@ namespace INDIACom.App_Cude
                 cmd.Connection = con;
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ProcInsertNews";
-                cmd.Parameters.AddWithValue("@Headline", news.Headline);
-                cmd.Parameters.AddWithValue("@Details", news.Details);
-                cmd.Parameters.AddWithValue("@NewsDate", news.NewsDate);
-                cmd.Parameters.AddWithValue("@FromDate", news.FromDate);
-                cmd.Parameters.AddWithValue("@ClosingDate", news.ClosingDate);
-                cmd.Parameters.AddWithValue("@Event", news.Event);
-                cmd.Parameters.AddWithValue("@FilePath", news.FilePath);
+                cmd.CommandText = "ProcInsertSession";
+                cmd.Parameters.AddWithValue("@SSName", ss.SSName);
+                cmd.Parameters.AddWithValue("@Mobile", ss.Mobile);
+                cmd.Parameters.AddWithValue("@Email", ss.Email);
+                cmd.Parameters.AddWithValue("@Org", ss.Organization);
+                cmd.Parameters.AddWithValue("@Topic", ss.Topic);
+                cmd.Parameters.AddWithValue("@Request_Date", ss.Request_Date);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 message = "Success";
-
             }
-
-
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
-                message = "Error: " + ex.Message;
+                message = "Something went wrong";
             }
             finally
             {
@@ -331,41 +270,156 @@ namespace INDIACom.App_Cude
 
             return message;
         }
-        public List<NewsModel> GetNews()
+
+        public long GetMemberID(string email, long mobile)
         {
-            List<NewsModel> newsList = new List<NewsModel>();
+           long memberID = 0;
             OpenConnection();
-            SqlCommand cmd = new SqlCommand("SELECT NewsId, Headline, NewsDate, FilePath FROM News", con);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
 
             try
             {
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_GetMemberID";
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Mobile", mobile);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                object result = cmd.ExecuteScalar();
+                if (result != null)
                 {
-                    newsList.Add(new NewsModel
-                    {
-                        NewsId = Convert.ToInt32(reader["NewsId"]),
-                        Headline = reader["Headline"].ToString(),
-                        NewsDate = Convert.ToDateTime(reader["NewsDate"]),
-                        FilePath = reader["FilePath"].ToString()
-                    });
+                    memberID = (long)result;
                 }
-                reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                
+                transaction.Rollback();
+
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return memberID;
+        }
+
+        public DataTable checkCredentials(LoginUserModel model)
+        {
+            DataTable ds = new DataTable();
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_CheckCredentials";
+                cmd.Parameters.AddWithValue("@EmailId",filter_bad_chars_rep(model.Email));
+                cmd.Parameters.AddWithValue("@UserID", model.UserID);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                sda.Fill(ds);
+            }
+            catch (Exception)
+            {
+                ds = new DataTable();
+                transaction.Rollback();
+                
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return ds;
+        }
+
+        public DataTable GetUserById(long memberId)
+        {
+            DataTable ds = new DataTable();
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_GetCredentials";
+                cmd.Parameters.AddWithValue("@memberid", memberId);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                sda.Fill(ds);
+            }
+            catch (Exception)
+            {
+                ds = new DataTable();
+                transaction.Rollback();
+
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return ds;
+        }
+
+        public bool UpdateUserProfile(MemberModel model)
+        {
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_UpdateProfile";
+                cmd.Parameters.AddWithValue("@memberId", model.MemberID);
+                cmd.Parameters.AddWithValue("@Salutation", model.Salutation);
+                cmd.Parameters.AddWithValue("@Name", model.Name);
+                cmd.Parameters.AddWithValue("@Address", model.Address);
+                cmd.Parameters.AddWithValue("@Country", model.Country);
+                cmd.Parameters.AddWithValue("@CountryID", model.CountryID);
+                cmd.Parameters.AddWithValue("@State", model.State);
+                cmd.Parameters.AddWithValue("@StateID", model.StateID);
+                cmd.Parameters.AddWithValue("@City", model.City);
+                cmd.Parameters.AddWithValue("@CityID", model.CityID);
+                cmd.Parameters.AddWithValue("@Pincode", model.Pincode);
+                cmd.Parameters.AddWithValue("@Email", model.Email);
+                cmd.Parameters.AddWithValue("@Mobile", model.Mobile);
+                cmd.Parameters.AddWithValue("@Event", model.Event);
+                cmd.Parameters.AddWithValue("@CSI_No", model.CSI_No);
+                cmd.Parameters.AddWithValue("@IEEE_No", model.IEEE_No);
+                cmd.Parameters.AddWithValue("@Organisation", model.OrganisationName);
+                cmd.Parameters.AddWithValue("@Category", model.Category);
+                cmd.Parameters.AddWithValue("@Password", model.Password);
+
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                return true;
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                return false;
             }
             finally
             {
                 DisposeConnection();
             }
 
-            return newsList;
         }
-    }
-    #endregion
+
+        #endregion
     
 }
-
-     
+}
