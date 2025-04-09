@@ -137,6 +137,7 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\SpecialSessionModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,12 +255,15 @@
     <Content Include="Views\Shared\ImportantDates.cshtml" />
     <Content Include="Views\Shared\Layoutweb.cshtml" />
     <Content Include="Views\Event\SubmitEvent.cshtml" />
-    <Content Include="Views\SpecialSession\SpecialSession.cshtml" />
+    <Content Include="Views\Home\SpecialSession.cshtml" />
+    <Content Include="Views\Home\SpecialSessionStatic.cshtml" />
+    <Content Include="Views\Home\SpecialSession2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Dropdown\" />
+    <Folder Include="Views\SpecialSession\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

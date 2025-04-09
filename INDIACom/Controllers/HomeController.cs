@@ -12,7 +12,18 @@ namespace INDIACom.Controllers
         {
             return View();
         }
-
+        public ActionResult SpecialSessionStatic()
+        {
+            return View();
+        }
+        public ActionResult SpecialSession()
+        {
+            return View();
+        }
+        public ActionResult SpecialSession2()
+        {
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

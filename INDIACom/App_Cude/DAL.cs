@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using INDIACom.Models;
+using System.Reflection;
 
 namespace INDIACom.App_Cude
 {
@@ -107,6 +108,8 @@ namespace INDIACom.App_Cude
         }
 
 
+
+
         #region department
 
         public string AddDepartment(Department dept)
@@ -203,13 +206,15 @@ namespace INDIACom.App_Cude
                 cmd.Connection = con;
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ProcInsertSession";
+                cmd.CommandText = "Proc_InsertSession";
                 cmd.Parameters.AddWithValue("@SSName", ss.SSName);
+                cmd.Parameters.AddWithValue("@MemberID", ss.MemberID);
+                cmd.Parameters.AddWithValue("@TrackID", ss.TrackID);
                 cmd.Parameters.AddWithValue("@Mobile", ss.Mobile);
                 cmd.Parameters.AddWithValue("@Email", ss.Email);
                 cmd.Parameters.AddWithValue("@Org", ss.Organization);
                 cmd.Parameters.AddWithValue("@Topic", ss.Topic);
-                cmd.Parameters.AddWithValue("@Request_Date", ss.Request_Date);
+               
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 message = "Success";
@@ -228,6 +233,61 @@ namespace INDIACom.App_Cude
         }
 
         #endregion
-    
-}
+
+
+        #region CheckBioDataExists
+
+        public string GetUserDetails(int memberId, out UserModel user)
+        {
+            string message = "";
+            user = null;
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Proc_GetUserDetails"; // Calling stored procedure
+                cmd.Parameters.AddWithValue("@MemberID", memberId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        user = new UserModel
+                        {
+                            MemberID = Convert.ToInt32(reader["MemberID"]),
+                            BioDataPath = reader["BioDataPath"] != DBNull.Value ? reader["BioDataPath"].ToString() : null
+                        };
+                        message = "Success";
+                    }
+                    else
+                    {
+                        message = "User not found";
+                    }
+                }
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                message = "Something went wrong";
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+            return message;
+        }
+
+
+        #endregion
+
+
+
+
+    }
 }

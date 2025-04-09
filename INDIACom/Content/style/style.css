@@ -602,13 +602,14 @@ h2,h3,h4,h5,h6{
     display: flex;
     justify-content: center;
     padding: 20px;
+    border: 1px solid white;
 }
 
 .customTable-main {
     width: 100%;
     font-size: 18px;
     border-collapse: collapse;
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 .customTable-header {
@@ -616,11 +617,12 @@ h2,h3,h4,h5,h6{
     color: white;
     font-weight: bold;
     text-align: center;
+    border: 1px solid white;
 }
 
 .customTable-main td {
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid white;
     text-align: left;
 }
 

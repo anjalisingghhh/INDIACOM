@@ -1,7 +1,9 @@
 ﻿using INDIACom.App_Cude;
 using INDIACom.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 
@@ -15,6 +17,29 @@ namespace INDIACom.Controllers
         {
             return View();
         }
+
+     /*  [HttpGet]
+        public JsonResult GetUserDetails(int memberId)
+        {
+            UserModel user;
+            string result = new DAL().GetUserDetails(memberId, out user); // Call DAL method
+
+            if (result == "Success" && user != null)
+            {
+                return Json(new { MemberID = user.MemberID, BioDataPath = user.BioDataPath }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { error = result }, JsonRequestBehavior.AllowGet);
+            }
+        }
+      
+        */
+
+
+
+
+
         [HttpPost]
         public JsonResult SpecialSession(SpecialSessionModel ss)
         {
@@ -29,6 +54,7 @@ namespace INDIACom.Controllers
                     return Json(new { success = false, message = "Validation failed.", errors });
 
                 }
+               
 
                 string result = dal.InsertSession(ss);
                 if (result == "Success")
