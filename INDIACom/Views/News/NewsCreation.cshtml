@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-xl-6 mx-auto">
+        <div class="card">
+            <div class="card-body p-4">
+                <h5 class="mb-4">News Form</h5>
+                <form class="row g-3" id="newsForm">
+                    <div class="col-md-12">
+                        <label for="newsId" class="form-label">News Id</label>
+                        <input type="text" class="form-control" id="newsId" placeholder="News Id">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="headline" class="form-label">Headline</label>
+                        <input type="text" class="form-control" id="headline" placeholder="Headline">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="details" class="form-label">Details</label>
+                        <textarea class="form-control" id="details" placeholder="Details"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="newsDate" class="form-label">News Date</label>
+                        <input type="date" class="form-control" id="newsDate">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="fromDate" class="form-label">From Date</label>
+                        <input type="date" class="form-control" id="fromDate">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="closingDate" class="form-label">Closing Date</label>
+                        <input type="date" class="form-control" id="closingDate">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="event" class="form-label">Event</label>
+                        <select id="event" class="form-select">
+                            <option selected="">Choose...</option>
+                            <option value="One">One</option>
+                            <option value="Two">Two</option>
+                            <option value="Three">Three</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="filePath" class="form-label">File Path</label>
+                        <input type="text" class="form-control" id="filePath" placeholder="File Path">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="d-md-flex d-grid align-items-center gap-3">
+                            <button type="button" class="btn btn-primary px-4" onclick="submitNews()">Submit</button>
+                            <button type="reset" class="btn btn-light px-4">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>function submitNews() {
+        var newsData = {
+            Headline: document.getElementById("headline").value,
+            Details: document.getElementById("details").value,
+            NewsDate: document.getElementById("newsDate").value,
+            FromDate: document.getElementById("fromDate").value,
+            ClosingDate: document.getElementById("closingDate").value,
+            Event: document.getElementById("event").value,
+            FilePath: document.getElementById("filePath").value
+        };
+
+    fetch('/News/InsertNews', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newsData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    document.getElementById("newsForm").reset();
+                }
+            })
+            .catch(error => alert("An error occurred: " + error));
+    }</script>

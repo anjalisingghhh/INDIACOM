@@ -12,6 +12,12 @@ namespace INDIACom.Controllers
         {
             return View();
         }
+
+       public ActionResult News()
+            {
+                return View();
+            }
+        
         public ActionResult SpecialSessionStatic()
         {
             return View();

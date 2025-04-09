@@ -124,8 +124,8 @@ namespace INDIACom.App_Cude
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Proc_AddDepartment";
                 cmd.Parameters.AddWithValue("Dept_Name", dept.DeptName);
-               
-              
+
+
                 cmd.Parameters.AddWithValue("Msg", "");
                 cmd.Parameters["Msg"].Size = 256;
                 cmd.Parameters["Msg"].Direction = ParameterDirection.InputOutput;
@@ -193,7 +193,7 @@ namespace INDIACom.App_Cude
 
         #endregion
 
-       
+
         #region SpecialSession 
         public string InsertSession(SpecialSessionModel ss)
         {
@@ -214,7 +214,7 @@ namespace INDIACom.App_Cude
                 cmd.Parameters.AddWithValue("@Email", ss.Email);
                 cmd.Parameters.AddWithValue("@Org", ss.Organization);
                 cmd.Parameters.AddWithValue("@Topic", ss.Topic);
-               
+
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 message = "Success";
@@ -286,8 +286,86 @@ namespace INDIACom.App_Cude
 
         #endregion
 
+      
 
 
 
+
+        #region News
+        public string InsertNews(NewsModel news)
+        {
+            string message = "";
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction transaction = con.BeginTransaction();
+
+            try
+            {
+                cmd.Connection = con;
+                cmd.Transaction = transaction;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "ProcInsertNews";
+                cmd.Parameters.AddWithValue("@Headline", news.Headline);
+                cmd.Parameters.AddWithValue("@Details", news.Details);
+                cmd.Parameters.AddWithValue("@NewsDate", news.NewsDate);
+                cmd.Parameters.AddWithValue("@FromDate", news.FromDate);
+                cmd.Parameters.AddWithValue("@ClosingDate", news.ClosingDate);
+                cmd.Parameters.AddWithValue("@Event", news.Event);
+                cmd.Parameters.AddWithValue("@FilePath", news.FilePath);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                message = "Success";
+
+            }
+
+
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                message = "Error: " + ex.Message;
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+
+            return message;
+        }
+        public List<NewsModel> GetNews()
+        {
+            List<NewsModel> newsList = new List<NewsModel>();
+            OpenConnection();
+            SqlCommand cmd = new SqlCommand("SELECT NewsId, Headline, NewsDate, FilePath FROM News", con);
+
+            try
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    newsList.Add(new NewsModel
+                    {
+                        NewsId = Convert.ToInt32(reader["NewsId"]),
+                        Headline = reader["Headline"].ToString(),
+                        NewsDate = Convert.ToDateTime(reader["NewsDate"]),
+                        FilePath = reader["FilePath"].ToString()
+                    });
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                DisposeConnection();
+            }
+
+            return newsList;
+        }
     }
+    #endregion
+    
 }
+
+     

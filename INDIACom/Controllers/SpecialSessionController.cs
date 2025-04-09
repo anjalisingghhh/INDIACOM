@@ -18,23 +18,48 @@ namespace INDIACom.Controllers
             return View();
         }
 
-     /*  [HttpGet]
-        public JsonResult GetUserDetails(int memberId)
-        {
-            UserModel user;
-            string result = new DAL().GetUserDetails(memberId, out user); // Call DAL method
+         [HttpGet]
+           public JsonResult GetUserDetails(int memberId)
+           {
+               UserModel user;
+               string result = new DAL().GetUserDetails(memberId, out user); // Call DAL method
 
-            if (result == "Success" && user != null)
+               if (result == "Success" && user != null)
+               {
+                   return Json(new { MemberID = user.MemberID, BioDataPath = user.BioDataPath }, JsonRequestBehavior.AllowGet);
+               }
+               else
+               {
+                   return Json(new { error = result }, JsonRequestBehavior.AllowGet);
+               }
+           }
+
+           
+
+     /*   [HttpGet]
+        public JsonResult GetMemberIds()
+        {
+            DAL dal = new DAL();
+            List<UserModel> users;
+            string result = dal.GetAllUsers(out users);
+
+            if (result == "Success")
             {
-                return Json(new { MemberID = user.MemberID, BioDataPath = user.BioDataPath }, JsonRequestBehavior.AllowGet);
+                var response = users.Select(u => new
+                {
+                    u.MemberID,
+                    u.BioDataPath
+                }).ToList();
+
+                return Json(response, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { error = result }, JsonRequestBehavior.AllowGet);
+                return Json(new { Message = result }, JsonRequestBehavior.AllowGet);
             }
         }
-      
-        */
+     */
+
 
 
 

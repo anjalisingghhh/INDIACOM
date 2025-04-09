@@ -25,9 +25,9 @@
 
     <script>
         document.getElementById("specialSessionButton").addEventListener("click", function () {
-           // let memberId = getMemberId(); // Fetch the member ID
-            let memberId = 101;
-          
+            // let memberId = getMemberId(); // Fetch the member ID
+            let memberId = 103;
+
 
             getUserDetails(memberId).then(userData => {
                 if (!userData) {
@@ -38,7 +38,7 @@
                 if (userData.BioDataPath) {
                     window.location.href = "/home/SpecialSession"; // Redirect to SpecialSession page
                 } else {
-                    window.location.href = "/home/SpecialSession2"; // Redirect to Edit Profile page
+                    window.location.href = "/home/cpp"; // Redirect to Edit Profile page
                 }
             });
         });
@@ -66,11 +66,15 @@
         }
 
         // Function to get the logged-in user's member ID
-      /*  function getMemberId() {
-            // Replace with actual logic to get member ID from session/local storage/cookies
-            let user = JSON.parse(localStorage.getItem("loggedInUser")); // Example using local storage
-            return user ? user.MemberID : null;
-        }*/
+        /*  function getMemberId() {
+              // Replace with actual logic to get member ID from session/local storage/cookies
+              let user = JSON.parse(localStorage.getItem("loggedInUser")); // Example using local storage
+              return user ? user.MemberID : null;
+          }*/
+   
+
+
+
     </script>
 
 
