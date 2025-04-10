@@ -497,10 +497,10 @@
 
         var formData = new FormData();
         var fileInput = $("#file")[0].files[0];
-        if (!fileInput) {
-            Swal.fire("Error", "Please select a file.", "error");
-            return;
-        }
+       // if (!fileInput) {
+         //   Swal.fire("Error", "Please select a file.", "error");
+           // return;
+       // }
 
         formData.append("__RequestVerificationToken", token);
         formData.append("Salutation", $("#Salutation").val());

@@ -1,7 +1,9 @@
 ﻿using INDIACom.App_Cude;
 using INDIACom.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -15,50 +17,90 @@ namespace INDIACom.Controllers
         [HttpGet]
         public ActionResult SpecialSession()
         {
-            return View();
-        }
-
-         [HttpGet]
-           public JsonResult GetUserDetails(int memberId)
-           {
-               UserModel user;
-               string result = new DAL().GetUserDetails(memberId, out user); // Call DAL method
-
-               if (result == "Success" && user != null)
-               {
-                   return Json(new { MemberID = user.MemberID, BioDataPath = user.BioDataPath }, JsonRequestBehavior.AllowGet);
-               }
-               else
-               {
-                   return Json(new { error = result }, JsonRequestBehavior.AllowGet);
-               }
-           }
-
-           
-
-     /*   [HttpGet]
-        public JsonResult GetMemberIds()
-        {
-            DAL dal = new DAL();
-            List<UserModel> users;
-            string result = dal.GetAllUsers(out users);
-
-            if (result == "Success")
+            if (Session["user"] == null)
             {
-                var response = users.Select(u => new
+                return RedirectToAction("Login", "Account");
+            }
+            var user = Session["user"] as MemberModel;
+            DataTable dt = dal.GetUserById(user.MemberID);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                SpecialSessionModel model = new SpecialSessionModel
                 {
-                    u.MemberID,
-                    u.BioDataPath
-                }).ToList();
+                    MemberID = user.MemberID // 👈 Pass the MemberID to the view model
+                };
 
-                return Json(response, JsonRequestBehavior.AllowGet);
+            
+
+                return View(model);
+
             }
-            else
-            {
-                return Json(new { Message = result }, JsonRequestBehavior.AllowGet);
-            }
+            return RedirectToAction("Login", "Account");
+
         }
-     */
+
+
+
+
+
+        [HttpGet]
+        public ActionResult SpecialSession2()
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var user = Session["user"] as MemberModel;
+            DataTable dt = dal.GetUserById(user.MemberID);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                MemberModel model = new MemberModel
+                {
+                    Name = dt.Rows[0]["Name"].ToString()
+                };
+
+                return View(model);
+
+            }
+            return RedirectToAction("Login", "Account");
+
+        }
+
+
+
+        [HttpGet]
+        public ActionResult SpecialSessionStatic()
+        {
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var user = Session["user"] as MemberModel;
+            DataTable dt = dal.GetUserById(user.MemberID);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                MemberModel model = new MemberModel
+                {
+                    MemberID = long.Parse(dt.Rows[0]["member_id"].ToString()),
+                    Biodata = dt.Rows[0]["Bio_data_path"] == DBNull.Value ? null : dt.Rows[0]["Bio_data_path"].ToString()
+                };
+                if (model.Biodata == null) {
+                    return RedirectToAction("SpecialSession2", "SpecialSession");
+                }
+
+                return RedirectToAction("SpecialSession", "SpecialSession");
+
+            }
+            return RedirectToAction("Login", "Account");
+
+        }
+
+     
 
 
 

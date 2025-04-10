@@ -12,7 +12,7 @@ namespace INDIACom.Models
         public string SSName { get; set; }
         public int TrackID { get; set; }  // Stores Track ID
        
-        public int MemberID { get; set; }
+        public long MemberID { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string Organization { get; set; }

@@ -18,67 +18,11 @@
     <p>
         <font color="#FF0000">
             <strong>
-                Kindly <a href="javascript:void(0);" id="specialSessionButton">click here</a> to submit a request for conducting a Special Session during INDIACom - 2025.
+                Kindly <a href="@Url.Action("SpecialSessionStatic", "SpecialSession")">click here</a> to submit a request for conducting a Special Session during INDIACom - 2025.
+
             </strong>
         </font>
     </p>
-
-    <script>
-        document.getElementById("specialSessionButton").addEventListener("click", function () {
-            // let memberId = getMemberId(); // Fetch the member ID
-            let memberId = 103;
-
-
-            getUserDetails(memberId).then(userData => {
-                if (!userData) {
-                    window.location.href = "/home/SpecialSession2"; // Redirect if no user data
-                    return;
-                }
-
-                if (userData.BioDataPath) {
-                    window.location.href = "/home/SpecialSession"; // Redirect to SpecialSession page
-                } else {
-                    window.location.href = "/home/cpp"; // Redirect to Edit Profile page
-                }
-            });
-        });
-
-        // Function to fetch user details from the server
-        function getUserDetails(memberId) {
-            return fetch(`/SpecialSession/GetUserDetails?memberId=${memberId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.error) {
-                        console.error("Error fetching user data:", data.error);
-                        return null;
-                    }
-                    return data; // Returns { MemberID, BioDataPath }
-                })
-                .catch(error => {
-                    console.error("Error fetching user details:", error);
-                    return null;
-                });
-        }
-
-        // Function to get the logged-in user's member ID
-        /*  function getMemberId() {
-              // Replace with actual logic to get member ID from session/local storage/cookies
-              let user = JSON.parse(localStorage.getItem("loggedInUser")); // Example using local storage
-              return user ? user.MemberID : null;
-          }*/
-   
-
-
-
-    </script>
-
-
-
 
 
     <div class="customTable">

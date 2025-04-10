@@ -1,4 +1,5 @@
 ﻿@model INDIACom.Models.SpecialSessionModel
+
 @{ Layout = "~/Views/Shared/Layoutweb.cshtml"; }
 
 
@@ -17,47 +18,48 @@
     }
 
     @Html.AntiForgeryToken()
-<form id="sessionForm">
+    <form id="sessionForm">
 
 
-    <label>Member ID.:</label>
-    @Html.TextBoxFor(m => m.MemberID, new { @class = "form-control", name = "MemberID" })
-    <br />
+        <label>Member ID.:</label>
+        @Html.TextBoxFor(m => m.MemberID, new { @class = "form-control", name = "MemberID", @readonly = "readonly" })
 
-    <label><span style="color: red;">*</span> Name:</label>
-    @Html.TextBoxFor(m => m.SSName, new { @class = "form-control", name = "SSName" })
-    <br />
-    <label>Mobile No.:</label>
-    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", name = "Mobile" })
-    <br />
-    <label><span style="color: red;">*</span> Email:</label>
-    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", name = "Email" })
-    <br />
-    <label>Organization:</label>
-    @Html.TextBoxFor(m => m.Organization, new { @class = "form-control", name = "Organization" })
-    <br />
-    <label>Topic:</label>
-    @Html.TextBoxFor(m => m.Topic, new { @class = "form-control", name = "Topic" })
-    <br />
+        <br />
 
-    <label><span style="color: red;">*</span> Select Track:</label>
-    @Html.DropDownListFor(m => m.TrackID, new List<SelectListItem>
-    {
-        new SelectListItem { Text = "Track 1", Value = "1" },
-        new SelectListItem { Text = "Track 2", Value = "2" },
-        new SelectListItem { Text = "Track 3", Value = "3" },
-        new SelectListItem { Text = "Track 4", Value = "4" }
-    }, "Select a Track", new { @class = "form-control", name = "TrackID" })
-    <br />
+        <label><span style="color: red;">*</span> Name:</label>
+        @Html.TextBoxFor(m => m.SSName, new { @class = "form-control", name = "SSName" })
+        <br />
+        <label>Mobile No.:</label>
+        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", name = "Mobile" })
+        <br />
+        <label><span style="color: red;">*</span> Email:</label>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", name = "Email" })
+        <br />
+        <label>Organization:</label>
+        @Html.TextBoxFor(m => m.Organization, new { @class = "form-control", name = "Organization" })
+        <br />
+        <label>Topic:</label>
+        @Html.TextBoxFor(m => m.Topic, new { @class = "form-control", name = "Topic" })
+        <br />
 
-
-
+        <label><span style="color: red;">*</span> Select Track:</label>
+        @Html.DropDownListFor(m => m.TrackID, new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Track 1", Value = "1" },
+            new SelectListItem { Text = "Track 2", Value = "2" },
+            new SelectListItem { Text = "Track 3", Value = "3" },
+            new SelectListItem { Text = "Track 4", Value = "4" }
+        }, "Select a Track", new { @class = "form-control", name = "TrackID" })
+        <br />
 
 
-    <button type="button" id="submitBtn">Submit</button>
-    <input type="reset" value="Reset">
 
-</form>
+
+
+        <button type="button" id="submitBtn">Submit</button>
+        <input type="reset" value="Reset">
+
+    </form>
     <!-- ✅ Correct closing bracket for the form -->
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -65,7 +67,7 @@
     <script src="~/Scripts/js/common.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </div>
-    <script>
+<script>
 $(document).ready(function () {
             $("#submitBtn").click(function () {
 
