@@ -1,0 +1,9 @@
+@{
+    var news = ViewBag.News;
+
+} 
+
+@foreach (var story in news)
+{
+    <p>@news.Headline - @news.Details</p>
+}

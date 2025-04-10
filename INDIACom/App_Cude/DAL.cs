@@ -11,6 +11,7 @@ using System.Reflection;
 using Microsoft.Ajax.Utilities;
 using System.Web.Helpers;
 using System.Web.Services.Description;
+using System.Reflection;
 
 namespace INDIACom.App_Cude
 {
@@ -110,54 +111,7 @@ namespace INDIACom.App_Cude
 
 
         }
-
-
-        #region Event
-
-        public string InsertEvent(EventModel model)
-        {
-            string message = "";
-            OpenConnection();
-            SqlCommand cmd = new SqlCommand();
-            SqlTransaction transaction = con.BeginTransaction();
-
-            try
-            {
-                cmd.Connection = con;
-                cmd.Transaction = transaction;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ProcInsertEvent";
-
-                cmd.Parameters.AddWithValue("@eventID", model.Event_Id);
-                cmd.Parameters.AddWithValue("@eventName", model.Event_Name);
-                cmd.Parameters.AddWithValue("@eventCreation", model.Event_Creation_date);
-                cmd.Parameters.AddWithValue("@eventOpeningDate", model.Event_Opening_date);
-                cmd.Parameters.AddWithValue("@eventClosingDate", model.Event_Closing_date);
-                cmd.Parameters.AddWithValue("@description", model.Event_Description);
-                cmd.Parameters.AddWithValue("@eventType", model.Event_Type);
-
-                cmd.ExecuteNonQuery();
-                transaction.Commit();
-                message = "Success";
-            }
-            catch (Exception)
-            {
-                transaction.Rollback();
-                message = "Something went wrong";
-            }
-            finally
-            {
-                DisposeConnection();
-            }
-
-            return message;
-        }
-
-
-
-        #endregion
-
-       
+   
         #region SpecialSession 
         public string InsertSession(SpecialSessionModel ss)
         {
@@ -170,13 +124,14 @@ namespace INDIACom.App_Cude
                 cmd.Connection = con;
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "ProcInsertSession";
+                cmd.CommandText = "Proc_InsertSession";
+                cmd.Parameters.AddWithValue("@MemberID", ss.MemberID);
                 cmd.Parameters.AddWithValue("@SSName", ss.SSName);
                 cmd.Parameters.AddWithValue("@Mobile", ss.Mobile);
                 cmd.Parameters.AddWithValue("@Email", ss.Email);
                 cmd.Parameters.AddWithValue("@Org", ss.Organization);
                 cmd.Parameters.AddWithValue("@Topic", ss.Topic);
-                cmd.Parameters.AddWithValue("@Request_Date", ss.Request_Date);
+                cmd.Parameters.AddWithValue("@TrackID", ss.TrackID);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
                 message = "Success";
@@ -286,7 +241,7 @@ namespace INDIACom.App_Cude
 
         public long GetMemberID(string email, long mobile)
         {
-           long memberID = 0;
+            long memberID = 0;
             OpenConnection();
             SqlCommand cmd = new SqlCommand();
             SqlTransaction transaction = con.BeginTransaction();
@@ -309,7 +264,7 @@ namespace INDIACom.App_Cude
             }
             catch (Exception)
             {
-                
+
                 transaction.Rollback();
 
             }
@@ -333,7 +288,7 @@ namespace INDIACom.App_Cude
                 cmd.Transaction = transaction;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Proc_CheckCredentials";
-                cmd.Parameters.AddWithValue("@EmailId",filter_bad_chars_rep(model.Email));
+                cmd.Parameters.AddWithValue("@EmailId", filter_bad_chars_rep(model.Email));
                 cmd.Parameters.AddWithValue("@UserID", model.UserID);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
@@ -344,7 +299,7 @@ namespace INDIACom.App_Cude
             {
                 ds = new DataTable();
                 transaction.Rollback();
-                
+
             }
             finally
             {
